@@ -14,5 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build Docker image
-        run: docker build -t jthies73-site .
+      - name: Deploy to Nginx
+        run: |
+          sudo mkdir -p /usr/share/nginx/html
+          sudo cp jthies73.html /usr/share/nginx/html/jthies73.html
+          sudo chmod 644 /usr/share/nginx/html/jthies73.html
