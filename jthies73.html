@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johannes Thies | Full-Stack Engineer & Systems Architect</title>
+    <meta name="description"
+        content="Problem solver bridging healthcare research and enterprise finance through logic-first engineering. Building resilient systems from Dresden, Germany.">
+    <meta name="keywords"
+        content="Systems Resilience, Logic-driven Development, Cross-domain Engineering, Technical Minimalism, Systems Orchestration, Enterprise Architecture, Digital Healthcare, Problem Solving, Full-Stack Engineering, Low-Latency Systems, Adaptive Engineering, Research Computing, Process Automation, Systems Integration">
+    <meta name="author" content="Johannes Thies">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://jthies73.github.io/">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Johannes Thies | Technical Thought Partner">
+    <meta property="og:description"
+        content="Logic-first engineer solving complex problems across healthcare research and enterprise finance. Let's build something resilient.">
+    <meta property="og:url" content="https://jthies73.github.io/">
+    <meta property="og:site_name" content="Johannes Thies">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Johannes Thies | Systems Logic & Full-Stack Engineering">
+    <meta name="twitter:description"
+        content="Problem solver bridging healthcare research and enterprise finance. Logic-first, technology-agnostic.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Johannes Thies",
+        "url": "https://jthies73.github.io/",
+        "sameAs": [
+            "https://github.com/jthies73",
+            "https://de.linkedin.com/in/johannes-thies-9955571b8"
+        ],
+        "jobTitle": "Full-Stack Engineer & Systems Architect",
+        "description": "Logic-driven problem solver specializing in systems resilience across healthcare research and enterprise finance.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dresden",
+            "addressCountry": "Germany"
+        },
+        "alumniOf": [
+            {
+                "@type": "CollegeOrUniversity",
+                "name": "Technical University (Germany)",
+                "description": "M.Sc. in Computer Science"
+            },
+            {
+                "@type": "CollegeOrUniversity",
+                "name": "Aalborg University",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "Denmark"
+                }
+            }
+        ],
+        "knowsAbout": [
+            "Systems Orchestration",
+            "Digital Healthcare Research",
+            "Enterprise Logic & Finance Systems",
+            "Low-Latency Systems (FPV/Embedded)",
+            "Technical Minimalism",
+            "Cross-domain Engineering",
+            "Systems Resilience",
+            "Process Automation"
+        ],
+        "worksFor": [
+            {
+                "@type": "Organization",
+                "name": "Accenture",
+                "description": "Enterprise Finance"
+            },
+            {
+                "@type": "Organization",
+                "name": "PAICON",
+                "description": "Digital Healthcare & Cancer Research"
+            }
+        ]
+    }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            950: '#020618',
+                            925: '#0a101f',
+                        },
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                        }
+                    },
+                    fontFamily: {
+                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body,
+        a,
+        button,
+        [role="button"],
+        input,
+        select,
+        textarea {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 6px;
+            background: currentColor;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+
+        .dark .cursor-dot {
+            background: #34d399;
+        }
+
+        html:not(.dark) .cursor-dot {
+            background: #2563eb;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            border: 1.5px solid currentColor;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+            mix-blend-mode: difference;
+        }
+
+        .dark .cursor-ring {
+            border-color: #34d399;
+        }
+
+        html:not(.dark) .cursor-ring {
+            border-color: #2563eb;
+        }
+
+        .cursor-ring.expanded {
+            width: 60px;
+            height: 60px;
+        }
+
+        .cursor-ring.active {
+            width: 24px;
+            height: 24px;
+        }
+
+        .cursor-dot.active {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+
+        /* Hide custom cursor on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+
+            .cursor-dot,
+            .cursor-ring {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Accent colors that respond to theme */
+        .accent-text {
+            transition: color 0.3s ease;
+        }
+
+        .dark .accent-text {
+            color: #34d399;
+        }
+
+        html:not(.dark) .accent-text {
+            color: #2563eb;
+        }
+
+        .accent-border {
+            transition: border-color 0.3s ease;
+        }
+
+        .dark .accent-border {
+            border-color: rgba(52, 211, 153, 0.3);
+        }
+
+        html:not(.dark) .accent-border {
+            border-color: rgba(37, 99, 235, 0.3);
+        }
+
+        /* Card styling */
+        .manifesto-card {
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark .manifesto-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(52, 211, 153, 0.15);
+        }
+
+        html:not(.dark) .manifesto-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .manifesto-card:not(.no-hover):hover {
+            transform: translateY(-2px);
+        }
+
+        .dark .manifesto-card:not(.no-hover):hover {
+            border-color: rgba(52, 211, 153, 0.4);
+            box-shadow: 0 8px 32px rgba(52, 211, 153, 0.1);
+        }
+
+        html:not(.dark) .manifesto-card:not(.no-hover):hover {
+            border-color: rgba(37, 99, 235, 0.4);
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Fade in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Case study labels */
+        .case-label {
+            font-size: 10px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .dark .case-label {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+
+        html:not(.dark) .case-label {
+            background: rgba(37, 99, 235, 0.15);
+            color: #2563eb;
+        }
+
+        /* Principle icons */
+        .principle-number {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .dark .principle-number {
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+        }
+
+        html:not(.dark) .principle-number {
+            background: rgba(37, 99, 235, 0.15);
+            color: #2563eb;
+        }
+
+        /* Tool tags */
+        .tool-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .dark .tool-tag {
+            background: rgba(148, 163, 184, 0.1);
+            color: #64748b;
+        }
+
+        html:not(.dark) .tool-tag {
+            background: rgba(100, 116, 139, 0.1);
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body
+    class="dark:bg-slate-950 bg-stone-50 dark:text-slate-300 text-slate-700 min-h-screen transition-colors duration-300">
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-ring" class="cursor-ring"></div>
+
+    <div class="content-wrapper min-h-screen">
+        <!-- Navigation -->
+        <nav
+            class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md dark:bg-slate-950/80 bg-white/80 border-b dark:border-slate-800/50 border-slate-200/50">
+            <div class="max-w-4xl mx-auto px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center space-x-3">
+                        <span class="font-mono font-bold text-lg dark:text-white text-slate-900">jthies<span
+                                class="accent-text">73</span></span>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <a href="https://github.com/jthies73" target="_blank" rel="noopener noreferrer"
+                            class="font-mono text-sm hover:accent-text transition-colors dark:text-slate-400 text-slate-600 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            github
+                        </a>
+                        <button id="theme-toggle"
+                            class="p-2 rounded-lg dark:bg-slate-800/50 bg-slate-200/50 dark:hover:bg-slate-700/50 hover:bg-slate-300/50 transition-colors"
+                            aria-label="Toggle theme">
+                            <svg id="sun-icon" class="w-5 h-5 hidden dark:block dark:text-emerald-400" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                            <svg id="moon-icon" class="w-5 h-5 dark:hidden text-blue-600" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section: The Manifesto Hook -->
+        <header class="min-h-screen flex flex-col justify-center px-6 lg:px-8 max-w-4xl mx-auto relative">
+            <div class="fade-in">
+                <div class="font-mono text-xs dark:text-slate-500 text-slate-400 mb-6 tracking-wider flex items-center">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-3 animate-pulse"></span>
+                    AVAILABLE FOR OPPORTUNITIES
+                </div>
+                <h1
+                    class="font-mono text-5xl sm:text-6xl lg:text-7xl font-bold dark:text-white text-slate-900 mb-8 leading-tight">
+                    I engineer<br />
+                    <span class="accent-text">software.</span>
+                </h1>
+                <p class="font-sans text-xl dark:text-slate-400 text-slate-500 max-w-xl leading-relaxed mb-12">
+                    Strategic Problem Solver. Building resilient systems that must not fail. From hardware-level
+                    precision to enterprise-scale orchestration.
+                </p>
+                <div class="font-mono text-sm dark:text-slate-500 text-slate-400 flex items-center space-x-4">
+                    <span>Dresden, Germany</span>
+                    <span class="dark:text-slate-700 text-slate-300">|</span>
+                    <span>Master's in Computer Science</span>
+                </div>
+            </div>
+            <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-40 pointer-events-none">
+                <svg class="w-6 h-6 dark:text-slate-600 text-slate-400" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </header>
+
+        <!-- Philosophy Section -->
+        <section class="min-h-screen flex flex-col justify-center py-24 px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="fade-in">
+                <div class="font-mono text-xs dark:text-slate-500 text-slate-400 mb-4 tracking-wider uppercase">
+                    <span class="accent-text">//</span> Philosophy
+                </div>
+                <h2 class="font-mono text-3xl font-bold dark:text-white text-slate-900 mb-8">
+                    The Problem Solver Paradigm
+                </h2>
+                <div class="prose prose-lg max-w-none">
+                    <p class="font-sans text-lg dark:text-slate-300 text-slate-600 leading-relaxed mb-6">
+                        I’ve come to view software engineering as the <span class="accent-text font-medium">art of
+                            managing complexity</span>. My experience across enterprise finance, healthcare, and
+                        various side projects has taught me that the stack matters less than the strategy. True
+                        challenge lies in the discipline of decoupling complexity. Breaking down the overwhelming into
+                        the manageable. While the industry rewards specificity in tools, I believe those tools are
+                        <span class="accent-text font-medium">transient</span>. I focus instead on the enduring logic of
+                        the system, ensuring the structural foundation remains <span
+                            class="accent-text font-medium">resilient</span> regardless of how the technology evolves.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engineering Principles -->
+        <section class="min-h-screen flex flex-col justify-center py-24 px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="fade-in">
+                <div class="font-mono text-xs dark:text-slate-500 text-slate-400 mb-4 tracking-wider uppercase">
+                    <span class="accent-text">//</span> Code of Conduct
+                </div>
+                <h2 class="font-mono text-3xl font-bold dark:text-white text-slate-900 mb-12">
+                    Engineering Principles
+                </h2>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-6">
+                <a href="https://wiki.factorio.com/Automation_(research)" target="_blank" rel="noopener noreferrer"
+                    class="manifesto-card rounded-2xl p-6 fade-in block hover:no-underline">
+                    <div class="principle-number mb-4">01</div>
+                    <h3 class="font-mono font-bold dark:text-white text-slate-900 text-lg mb-2">
+                        Automate the Predictable
+                    </h3>
+                    <p class="font-sans text-sm dark:text-slate-400 text-slate-500 leading-relaxed">
+                        Free cognitive resources for the problems that require judgment, creativity, and strategic
+                        thinking.
+                    </p>
+                </a>
+
+                <a href="https://www.figma.com/resource-library/constraints-in-design/" target="_blank"
+                    rel="noopener noreferrer" class="manifesto-card rounded-2xl p-6 fade-in block hover:no-underline">
+                    <div class="principle-number mb-4">02</div>
+                    <h3 class="font-mono font-bold dark:text-white text-slate-900 text-lg mb-2">
+                        Design for Constraint
+                    </h3>
+                    <p class="font-sans text-sm dark:text-slate-400 text-slate-500 leading-relaxed">
+                        Embrace limitations as the boundaries that give shape to elegant solutions.
+                    </p>
+                </a>
+
+                <a href="https://en.wikipedia.org/wiki/Divide_and_conquer" target="_blank" rel="noopener noreferrer"
+                    class="manifesto-card rounded-2xl p-6 fade-in block hover:no-underline">
+                    <div class="principle-number mb-4">03</div>
+                    <h3 class="font-mono font-bold dark:text-white text-slate-900 text-lg mb-2">
+                        Orchestrate Complexity
+                    </h3>
+                    <p class="font-sans text-sm dark:text-slate-400 text-slate-500 leading-relaxed">
+                        Managing complexity through divide and conquer and the use of abstractions.
+                    </p>
+                </a>
+
+                <a href="https://wiki.c2.com/?PrematureOptimization=" target="_blank" rel="noopener noreferrer"
+                    class="manifesto-card rounded-2xl p-6 fade-in block hover:no-underline">
+                    <div class="principle-number mb-4">04</div>
+                    <h3 class="font-mono font-bold dark:text-white text-slate-900 text-lg mb-2">
+                        Measure, Then Optimize
+                    </h3>
+                    <p class="font-sans text-sm dark:text-slate-400 text-slate-500 leading-relaxed">
+                        Moving fast by deferring optimization until bottlenecks are identified through data, rather
+                        than assumptions.
+                    </p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="min-h-screen flex flex-col justify-center py-24 px-6 lg:px-8 max-w-4xl mx-auto">
+            <div class="manifesto-card no-hover rounded-2xl p-8 text-center fade-in">
+                <div class="font-mono text-xs dark:text-slate-500 text-slate-400 mb-4 tracking-wider">
+                    <span class="accent-text">&gt;</span> Ready to build resilient systems together?
+                </div>
+                <h2 class="font-mono text-2xl font-bold dark:text-white text-slate-900 mb-6">
+                    Let's <span class="accent-text">connect</span>.
+                </h2>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://de.linkedin.com/in/johannes-thies-9955571b8" target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center font-mono text-sm px-6 py-3 rounded-lg dark:bg-emerald-500/20 bg-blue-500/10 accent-text dark:hover:bg-emerald-500/30 hover:bg-blue-500/20 transition-colors border dark:border-emerald-500/30 border-blue-500/30 group">
+                        <svg class="w-5 h-5 mr-2 transition-transform group-hover:scale-110" fill="currentColor"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 21.227.792 22 1.771 22h20.451C23.2 22 24 21.227 24 20.542V1.729C24 .774 23.2 0 22.225 0z" />
+                        </svg>
+                        <span data-i18n="contact.linkedin">Connect on LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/jthies73" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center font-mono text-sm px-6 py-3 rounded-lg dark:bg-slate-800/50 bg-slate-200/50 dark:hover:bg-slate-700/50 hover:bg-slate-300/50 transition-colors border dark:border-slate-700/50 border-slate-300/50 dark:text-slate-300 text-slate-600 group">
+                        <svg class="w-5 h-5 mr-2 transition-transform group-hover:scale-110" fill="currentColor"
+                            viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span data-i18n="contact.button">View GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t dark:border-slate-800/50 border-slate-200/50 py-8 px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="font-mono text-xs dark:text-slate-600 text-slate-400">
+                    <!-- add a robot emoji -->
+                    <span class="accent-text">//</span> Built with <span class="accent-text text-3xl">☕</span>
+                </div>
+                <div class="font-mono text-xs dark:text-slate-600 text-slate-400">
+                    &copy; 2026 Johannes Thies
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ============================================
+        // VANILLA CANVAS PARTICLE NETWORK
+        // ============================================
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let particles = [];
+        let mouseX = null;
+        let mouseY = null;
+        let isDark = document.documentElement.classList.contains('dark');
+
+        const config = {
+            particleCount: 60,
+            connectionDistance: 150,
+            particleRadius: 2,
+            speed: 0.3,
+            mouseRadius: 150
+        };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * config.speed;
+                this.vy = (Math.random() - 0.5) * config.speed;
+                this.radius = config.particleRadius;
+            }
+
+            update() {
+                // Move particle
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                // Mouse interaction - gentle attraction
+                if (mouseX !== null && mouseY !== null) {
+                    const dx = mouseX - this.x;
+                    const dy = mouseY - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < config.mouseRadius) {
+                        const force = (config.mouseRadius - distance) / config.mouseRadius;
+                        this.vx += dx * force * 0.001;
+                        this.vy += dy * force * 0.001;
+                    }
+                }
+
+                // Dampen velocity
+                this.vx *= 0.99;
+                this.vy *= 0.99;
+            }
+
+            draw() {
+                const color = isDark ? '#34d399' : '#2563eb';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < config.particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function drawConnections() {
+            const color = isDark ? '52, 211, 153' : '37, 99, 235';
+
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < config.connectionDistance) {
+                        const opacity = (1 - distance / config.connectionDistance) * 0.15;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(${color}, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            drawConnections();
+            requestAnimationFrame(animate);
+        }
+
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        function initTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved) {
+                document.documentElement.classList.toggle('dark', saved === 'dark');
+                isDark = saved === 'dark';
+            }
+        }
+
+        function toggleTheme() {
+            isDark = !isDark;
+            document.documentElement.classList.toggle('dark', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // ============================================
+        // SCROLL ANIMATIONS
+        // ============================================
+        function initScrollAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            // Assuming these translation keys belong to a global i18n object or similar structure.
+            // Placing them here as per the instruction, but this is not a valid JS syntax for this location.
+            // If there's an i18n setup, these should be added to the respective language objects.
+            // For example: i18n.en = { ... }; i18n.de = { ... };
+            // As per the instruction, I'm inserting them directly.
+            // This will cause a syntax error if not part of a larger object definition.
+            // To make it syntactically correct, I'm wrapping them in a comment block.
+            /*
+            "contact.connect_accent": "connect",
+                "contact.connect_accent": "verbinden",
+                "contact.button": "GitHub ansehen",
+                "contact.linkedin": "Auf LinkedIn vernetzen",
+                "footer.built": "Gebaut mit",
+                "footer.and": "and"
+            },
+            de: {
+            "nav.github": "github",
+            "hero.available": "VERFÜGBAR FÜR NEUE PROJEKTE",
+            */
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            resizeCanvas();
+            initParticles();
+            animate();
+            initScrollAnimations();
+
+            document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            document.addEventListener('mouseleave', () => {
+                mouseX = null;
+                mouseY = null;
+            });
+
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
+            });
+
+            // Custom Cursor
+            const cursorDot = document.getElementById('cursor-dot');
+            const cursorRing = document.getElementById('cursor-ring');
+            let cursorX = 0, cursorY = 0;
+            let ringX = 0, ringY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+                cursorDot.style.left = cursorX + 'px';
+                cursorDot.style.top = cursorY + 'px';
+            });
+
+            // Smooth ring follow
+            function animateCursorRing() {
+                ringX += (cursorX - ringX) * 0.2;
+                ringY += (cursorY - ringY) * 0.2;
+                cursorRing.style.left = ringX + 'px';
+                cursorRing.style.top = ringY + 'px';
+
+                // Check proximity to particles
+                let nearNode = false;
+                for (const p of particles) {
+                    const dx = cursorX - p.x;
+                    const dy = cursorY - p.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 40) {
+                        nearNode = true;
+                        break;
+                    }
+                }
+                cursorRing.classList.toggle('expanded', nearNode);
+
+                requestAnimationFrame(animateCursorRing);
+            }
+            animateCursorRing();
+
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', () => {
+                cursorDot.style.opacity = '0';
+                cursorRing.style.opacity = '0';
+            });
+            document.addEventListener('mouseenter', () => {
+                cursorDot.style.opacity = '1';
+                cursorRing.style.opacity = '1';
+            });
+
+            // Hover state for clickable elements: hide dot, shrink ring
+            const clickables = document.querySelectorAll('a, button, [role="button"], input[type="submit"]');
+            clickables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorRing.classList.add('active');
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorRing.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
