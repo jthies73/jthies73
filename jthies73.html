@@ -379,6 +379,11 @@
             background: rgba(100, 116, 139, 0.1);
             color: #64748b;
         }
+
+        /* Subtle credit text */
+        .credit-text {
+            font-size: 6px;
+        }
     </style>
 </head>
 
@@ -584,12 +589,10 @@
         <footer class="border-t dark:border-slate-800/50 border-slate-200/50 py-8 px-6 lg:px-8">
             <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="font-mono text-xs dark:text-slate-600 text-slate-400">
-                    <!-- add a robot emoji -->
-                    <span class="accent-text">//</span> Built with <span class="accent-text text-3xl">☕</span> <span
-                        style="font-size: 6px;">and </span><span class="accent-text"
-                        style="font-size: 6px;">Gemini</span>
+                    <span class="accent-text">//</span> Built with <span class="accent-text text-3xl">☕</span>
+                    <span class="credit-text">and </span><span class="accent-text credit-text">Gemini</span>
                 </div>
-                <div class="font-mono text-s dark:text-slate-600 text-slate-400">
+                <div class="font-mono text-xs dark:text-slate-600 text-slate-400">
                     &copy; 2026 Johannes Thies
                 </div>
             </div>
@@ -738,26 +741,6 @@
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             });
-
-            // Assuming these translation keys belong to a global i18n object or similar structure.
-            // Placing them here as per the instruction, but this is not a valid JS syntax for this location.
-            // If there's an i18n setup, these should be added to the respective language objects.
-            // For example: i18n.en = { ... }; i18n.de = { ... };
-            // As per the instruction, I'm inserting them directly.
-            // This will cause a syntax error if not part of a larger object definition.
-            // To make it syntactically correct, I'm wrapping them in a comment block.
-            /*
-            "contact.connect_accent": "connect",
-                "contact.connect_accent": "verbinden",
-                "contact.button": "GitHub ansehen",
-                "contact.linkedin": "Auf LinkedIn vernetzen",
-                "footer.built": "Gebaut mit",
-                "footer.and": "and"
-            },
-            de: {
-            "nav.github": "github",
-            "hero.available": "VERFÜGBAR FÜR NEUE PROJEKTE",
-            */
 
             document.querySelectorAll('.fade-in').forEach(el => {
                 observer.observe(el);
